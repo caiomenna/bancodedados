@@ -1,0 +1,75 @@
+<%
+  const fallbackImages = [
+    "https://images.unsplash.com/photo-1769353785928-e6ccc4b9e635?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=900",
+    "https://images.unsplash.com/photo-1789464262538-42d60248214a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=900",
+    "https://images.unsplash.com/photo-1771014846919-3a1cf73aeea1?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=900",
+    "https://images.unsplash.com/photo-1779784360547-1b7c68bd50bc?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&q=80&w=900",
+  ];
+  const categoryColors = ["cyan", "violet", "blue", "pink"];
+  const categoryIcons = ["gamepad", "spark", "grid", "monitor"];
+  const imageData = (value) => {
+    if (!value) return null;
+    if (typeof value === "string" && value.startsWith("data:image/")) return value;
+    const buffer = Buffer.isBuffer(value)
+      ? value
+      : value.buffer
+        ? Buffer.from(value.buffer)
+        : Buffer.from(value);
+    return `data:image/png;base64,${buffer.toString("base64")}`;
+  };
+  const catalogData = {
+    games: jogos.map((jogo, index) => {
+      const categoryIndex = categorias.findIndex(
+        (categoria) => String(categoria._id) === String(jogo.categoria?._id),
+      );
+      return {
+        id: String(jogo._id),
+        title: jogo.titulo,
+        description: jogo.sinopse,
+        year: jogo.anolancamento,
+        category: jogo.categoria?.nome || "Sem categoria",
+        studio: jogo.desenvolvedora?.nome || "Desenvolvedora não informada",
+        image: imageData(jogo.fotoJogo) || fallbackImages[index % fallbackImages.length],
+        alt: `Capa do jogo ${jogo.titulo}`,
+        accent: categoryColors[(categoryIndex < 0 ? 0 : categoryIndex) % categoryColors.length],
+      };
+    }),
+    categories: categorias.map((categoria, index) => ({
+      name: categoria.nome,
+      count: jogos.filter(
+        (jogo) => String(jogo.categoria?._id) === String(categoria._id),
+      ).length,
+      icon: categoryIcons[index % categoryIcons.length],
+      color: categoryColors[index % categoryColors.length],
+    })),
+    developers: desenvolvedoras.map((desenvolvedora, index) => ({
+      name: desenvolvedora.nome,
+      count: jogos.filter(
+        (jogo) => String(jogo.desenvolvedora?._id) === String(desenvolvedora._id),
+      ).length,
+      image: imageData(desenvolvedora.fotoDesenvolvedora),
+      initials: desenvolvedora.nome
+        .split(/\s+/)
+        .slice(0, 2)
+        .map((part) => part[0])
+        .join("")
+        .toUpperCase(),
+      color: `tone-${index % categoryColors.length}`,
+    })),
+  };
+%>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8faff" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <div id="root" data-page="<%= page %>"></div>
+    <script id="catalog-data" type="application/json"><%- JSON.stringify(catalogData).replace(/</g, "\\u003c") %></script>
+    <script type="module" src="/site/assets/main.js"></script>
+  </body>
+</html>

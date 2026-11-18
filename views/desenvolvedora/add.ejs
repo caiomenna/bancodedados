@@ -1,0 +1,17 @@
+<%- include('../cabecalho.ejs')%>
+    <h1>Adicionar Desenvolvedora</h1>
+    <div>
+        <a href="/desenvolvedora/lst">Listar desenvolvedoras</a>
+    </div>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            <label>Nome:</label>
+            <input type="text" name="nome"><br>
+            <label for="fotoDesenvolvedora">Foto:</label>
+            <input type="file" id="fotoDesenvolvedora" name="fotoDesenvolvedora">
+            <button type="submit">Cadastrar</button>
+
+        </form>
+    </div>
+
+    <%- include('../rodape.ejs')%>

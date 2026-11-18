@@ -1,0 +1,20 @@
+<%- include('../cabecalho.ejs')%>
+    <h1>Editar Desenvolvedora</h1>
+    <div>
+        <a href="/desenvolvedora/lst">Listar</a>
+    </div>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<%= Desenvolvedora._id %>"><br>
+            <label>Nome:</label>
+            <input type="text" name="nome" value="<%= Desenvolvedora.nome %>"><br>
+            <label>Foto:</label>
+            <% if (Desenvolvedora.fotoDesenvolvedora) { %>
+                <img src="<%= Desenvolvedora.fotoDesenvolvedora %>" width="100" height="100"><br>
+                <% } %>
+                    <input type="file" name="fotoDesenvolvedora"><br>
+                    <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+    <%- include('../rodape.ejs')%>

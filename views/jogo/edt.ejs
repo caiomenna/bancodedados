@@ -1,0 +1,100 @@
+<%- include('../cabecalho.ejs')%>
+
+<h1>Editar Jogo</h1>
+
+<div>
+    <a href="/jogo/lst">Listar</a>
+</div>
+
+<div>
+
+    <form method="post" enctype="multipart/form-data">
+
+        <label>Nome:</label>
+        <input
+            type="text"
+            name="nome"
+            value="<%= Jogo.nome %>"
+            required
+        >
+        <br>
+
+        <label>Descrição:</label>
+        <input
+            type="text"
+            name="descricao"
+            value="<%= Jogo.descricao %>"
+            required
+        >
+        <br>
+
+        <label>Ano de lançamento:</label>
+        <input
+            type="number"
+            name="anoLancamento"
+            value="<%= Jogo.anoLancamento %>"
+            required
+        >
+        <br>
+
+        <label>Categoria:</label>
+
+        <select name="categoria" id="categoria" required>
+
+            <% Categorias.forEach(function(categoria){ %>
+
+                <option
+                    value="<%= categoria.id %>"
+                    <%= (Jogo.categoria &&
+                         categoria.id.toString() === Jogo.categoria._id.toString())
+                         ? 'selected' : '' %>
+                >
+                    <%= categoria.nome %>
+                </option>
+
+            <% }) %>
+
+        </select>
+
+        <br>
+
+        <label>Desenvolvedora:</label>
+
+        <select name="desenvolvedora" id="desenvolvedora" required>
+
+            <% Desenvolvedoras.forEach(function(desenvolvedora){ %>
+
+                <option
+                    value="<%= desenvolvedora.id %>"
+                    <%= (Jogo.desenvolvedora &&
+                         desenvolvedora.id.toString() === Jogo.desenvolvedora._id.toString())
+                         ? 'selected' : '' %>
+                >
+                    <%= desenvolvedora.nome %>
+                </option>
+
+            <% }) %>
+
+        </select>
+
+        <br>
+
+        <label>Foto:</label>
+
+        <% if (Jogo.foto) { %>
+            <br>
+            <img src="<%= Jogo.foto %>" width="100">
+            <br>
+        <% } %>
+
+        <input type="file" name="foto">
+
+        <br>
+
+        <button type="submit">Editar</button>
+
+    </form>
+
+</div>
+
+<%- include('../rodape.ejs')%>

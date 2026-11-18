@@ -1,0 +1,36 @@
+<%- include('../cabecalho.ejs')%>
+    <h1>Desenvolvedoras</h1>
+    <div>
+        <form action="/desenvolvedora/lst" method="post">
+            <input type="text" name="filtro" id="" placeholder="Digite o nome">
+            <button type="submit">Pesquisar</button>
+        </form>
+    </div>
+    <a href="/desenvolvedora/add">+ Desenvolvedora</a>
+    <table>
+        <tr>
+            <td>Nome</td>
+            <td>Foto</td>
+            <td>Ações</td>
+        </tr>
+
+        <% for (const desenvolvedora of Desenvolvedoras) { %>
+            <tr>
+                <td>
+                    <%= desenvolvedora.nome %>
+                </td>
+                <td>
+                    <% if (desenvolvedora.fotoDesenvolvedora) { %>
+                        <img src="<%= desenvolvedora.fotoDesenvolvedora%>" width="100" height="100" alt="Foto da desenvolvedora">
+                        <% } else { %>
+                            Sem foto
+                            <% } %>
+                </td>
+                <td>
+                    <a href="/desenvolvedora/edt/<%= desenvolvedora._id %>">Editar</a>
+                    <a href="/desenvolvedora/del/<%= desenvolvedora._id %>">Excluir</a>
+                </td>
+            </tr>
+            <% } %>
+    </table>
+    <%- include('../rodape.ejs')%>

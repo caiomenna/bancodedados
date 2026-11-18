@@ -1,0 +1,10 @@
+{
+  "description": "Discover and explore a comprehensive library of electronic games, filter by category, and engage with features like favorites and game ratings.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -1,0 +1,38 @@
+<%- include('../cabecalho.ejs')%>
+    <h1>Adicionar Jogo</h1>
+    <div>
+        <a href="/jogo/lst">Listar Jogos</a>
+    </div>
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            <label>Título:</label>
+            <input type="text" name="titulo"><br>
+            <label>Ano de Lançamento:</label>
+            <input type="number" name="anolancamento"><br>
+            <label>Sinopse:</label>
+            <input type="text" name="sinopse"><br>
+            <label for="fotoJogo">Foto:</label>
+            <input type="file" id="fotoJogo" name="fotoJogo"> <br>
+            <label for="categoria" class="form-label">Categoria:</label>
+            <select name="categoria" id="categoria" class="form-control">
+                <option value="">Selecione a categoria</option>
+                <%Categorias.forEach(function(categoria){%>
+                    <option value='<%=categoria.id%>'>
+                        <%=categoria.nome%>
+                    </option>
+                    <%})%>
+            </select>
+            <select name="desenvolvedora" id="desenvolvedora" class="form-control">
+                <option value="">Selecione a desenvolvedora</option>
+                <%Desenvolvedoras.forEach(function(desenvolvedora){%>
+                    <option value='<%=desenvolvedora.id%>'>
+                        <%=desenvolvedora.nome%>
+                    </option>
+                    <%})%>
+            </select>
+            <button type="submit">Cadastrar</button>
+
+        </form>
+    </div>
+
+    <%- include('../rodape.ejs')%>

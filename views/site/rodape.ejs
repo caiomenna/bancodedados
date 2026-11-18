@@ -1,0 +1,24 @@
+      </main>
+      <footer class="site-footer">
+        <div class="container footer-grid">
+          <div>
+            <a href="/site/" class="brand footer-brand"><span class="brand-mark" aria-hidden="true">L</span><span>Ludo<span>teca</span></span></a>
+            <p>Seu universo de jogos, organizado em um só lugar.</p>
+          </div>
+          <div><strong>Explore</strong><a href="/site/jogos">Todos os jogos</a><a href="/site/categorias">Categorias</a><a href="/site/desenvolvedoras">Desenvolvedoras</a></div>
+          <div><strong>Sua conta</strong><a href="/site/login">Entrar</a><a href="/site/cadastro">Criar conta</a><a href="/site/desejos">Lista de desejos</a><a href="/site/avaliacoes">Avaliações</a></div>
+          <div><strong>Acessibilidade</strong><p>Interface compatível com teclado e leitores de tela.</p></div>
+        </div>
+        <div class="container footer-bottom"><span>&copy; 2026 Ludoteca</span><span>Feito para quem ama jogar.</span></div>
+      </footer>
+    </div>
+    <script>
+      const menuButton = document.querySelector(".menu-button");
+      const navigation = document.querySelector("#site-navigation");
+      menuButton.addEventListener("click", () => {
+        const isOpen = navigation.classList.toggle("is-open");
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+      });
+    </script>
+  </body>
+</html>

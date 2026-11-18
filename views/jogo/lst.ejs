@@ -1,0 +1,52 @@
+<%- include('../cabecalho.ejs')%>
+    <h1>Jogos</h1>
+    <div>
+        <form action="/jogo/lst" method="post">
+            <input type="text" name="filtro" id="" placeholder="Digite o nome do jogo">
+            <button type="submit">Pesquisar</button>
+        </form>
+    </div>
+    <a href="/jogo/add">+ Novo Jogo</a>
+    <table>
+        <tr>
+            <td>Nome</td>
+            <td>Sinopse</td>
+            <td>Ano de Lançamento</td>
+            <td>Foto</td>
+            <td>Categoria</td>
+            <td>Desenvolvedora</td>
+            <td>Ações</td>
+        </tr>
+
+        <% for (const {id, titulo, sinopse, anolancamento, fotoJogo, categoria, desenvolvedora} of Jogos) { %>
+            <tr>
+                <td>
+                    <%= titulo %>
+                </td>
+                <td>
+                    <%= sinopse %>
+                </td>
+                <td>
+                    <%= anolancamento %>
+                </td>
+                <td>
+                    <% if (fotoJogo) { %>
+                        <img src="<%=fotoJogo%>" width="180" height="150" alt="Foto do jogo">
+                        <% } else { %>
+                            Sem foto
+                            <% } %>
+                </td>
+                <td>
+                    <%=categoria !=null ? categoria.nome : "" %>
+                </td>
+                <td>
+                    <%=desenvolvedora !=null ? desenvolvedora.nome : "" %>
+                </td>
+                <td>
+                    <a href="/jogo/edt/<%= id %>">Editar</a>
+                    <a href="/jogo/del/<%= id %>">Excluir</a>
+                </td>
+            </tr>
+            <% } %>
+    </table>
+    <%- include('../rodape.ejs')%>
